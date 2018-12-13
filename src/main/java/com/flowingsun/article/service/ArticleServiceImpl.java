@@ -348,7 +348,8 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Category> getCategory(){
         logger.info("\n----------------------正在尝试从redis获取文章分类...----------------------");
         List<Category> categories = redisDAO.getList("categories");
-        if(categories==null){
+        logger.info("redis categoried:"+categories.toString());
+        if(categories==null||categories.size()==0){
             logger.warn("\n----------------------从redis获取文章分类失败!----------------------");
             categories = articleMapper.selectMainCategory();
             for(int i=0;i<categories.size();i++){
