@@ -191,7 +191,10 @@ public class ArticleServiceImpl implements ArticleService {
             logger.info("\n----------------------从redis获取文章标签成功!----------------------\n");
         }
         return allTags;
+
     }
+
+
 
     /**
      *@Author Lyon[flowingsun007@163.com]
@@ -256,9 +259,11 @@ public class ArticleServiceImpl implements ArticleService {
         commentMapper.deleteByArticleId(articleId);
         collectionMapper.deleteByArticleId(articleId);
         List<Integer> commentidList = commentMapper.selectCommentsIdByArticleId(articleId);
-        for(int i=0;i<commentidList.size();i++){
-            commentLikeMapper.deleteByCommentId(commentidList.get(i));
-            discussionMapper.deleteByCommentId(commentidList.get(i));
+        if(commentidList.size()>0){
+            for(int i=0;i<commentidList.size();i++){
+                commentLikeMapper.deleteByCommentId(commentidList.get(i));
+                discussionMapper.deleteByCommentId(commentidList.get(i));
+            }
         }
     }
 
@@ -348,8 +353,7 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Category> getCategory(){
         logger.info("\n----------------------正在尝试从redis获取文章分类...----------------------");
         List<Category> categories = redisDAO.getList("categories");
-        logger.info("redis categoried:"+categories.toString());
-        if(categories==null||categories.size()==0){
+        if(categories==null){
             logger.warn("\n----------------------从redis获取文章分类失败!----------------------");
             categories = articleMapper.selectMainCategory();
             for(int i=0;i<categories.size();i++){
