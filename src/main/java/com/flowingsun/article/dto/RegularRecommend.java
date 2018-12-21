@@ -1,10 +1,15 @@
-package com.flowingsun.article.entity;
+package com.flowingsun.article.dto;
 
 public class RegularRecommend {
+
     private Integer articleId;
+
     private Integer previousArticleId;
+
     private Integer nextArticleId;
+
     private String previousTitle;
+
     private String nextTitle;
 
     public Integer getArticleId() {

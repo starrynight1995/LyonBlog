@@ -1,12 +1,17 @@
-package com.flowingsun.article.entity;
+package com.flowingsun.article.dto;
 
 import java.util.Date;
 
 public class ArticleThank {
+
     private Integer articleId;
+
     private Integer thankNum;
+
     private Integer userId;
+
     private String userName;
+
     private Date thankDate;
 
     public Integer getArticleId() {
