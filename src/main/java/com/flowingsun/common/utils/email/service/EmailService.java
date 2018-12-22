@@ -52,18 +52,30 @@ public class EmailService {
      * @throws UnsupportedEncodingException 异常
      */
     public static void sendHtmlMail(HttpServletRequest request, String toEmail, String userName, Integer randomCode, String userphone) throws MessagingException,UnsupportedEncodingException {
-        String subject = "Lyon's Blog——注册激活";
-        String content = "<html><p>亲爱的：" + userName +
-                ",感谢您注册了Lyon's Blog,"+
-                "请于30分钟内点击<a href=" + request.getHeader("Referer") +"user/register/activate?code="+randomCode + "&userphone="+userphone+">链接</a>以激活注册！</p></html>";
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        // 设置utf-8或GBK编码，否则邮件会有乱码
-        MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-        messageHelper.setFrom(EMAILFORM, "稳稳地幸福(Lyon)");
-        messageHelper.setTo(toEmail);
-        messageHelper.setSubject(subject);
-        messageHelper.setText(content,true);
-        mailSender.send(mimeMessage);
+        try{
+            System.out.println("sendHtmlMail开始。。。。。。。。。。。。。。");
+            String subject = "Lyon's Blog——注册激活";
+            String content = "<html><p>亲爱的：" + userName +
+                    ",感谢您注册了Lyon's Blog,"+
+                    "请于30分钟内点击<a href=" + request.getHeader("Referer") +"user/register/activate?code="+randomCode + "&userphone="+userphone+">链接</a>以激活注册！</p></html>";
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            // 设置utf-8或GBK编码，否则邮件会有乱码
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+            messageHelper.setFrom(EMAILFORM, "稳稳地幸福(Lyon)");
+            messageHelper.setTo(toEmail);
+            messageHelper.setSubject(subject);
+            messageHelper.setText(content,true);
+            System.out.println("sendHtmlMail即将发送。。。。。。。。。。。。。。");
+            mailSender.send(mimeMessage);
+            System.out.println("sendHtmlMail发送完成。。。。。。。。。。。。。。");
+        }catch (MessagingException e){
+            throw e;
+        }catch (UnsupportedEncodingException f){
+            throw f;
+        } catch (Exception g){
+            System.out.println("sendHtmlMail异常：.........................\n");
+            g.printStackTrace();
+        }
     }
 
     /**
