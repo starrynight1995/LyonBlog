@@ -69,6 +69,7 @@ public class UserServiceImpl implements UserService {
             String md5pass = MD5Utils.encryptPassword(saltPass);
             user.setUserpass(md5pass);
             user.setSalt(salt);
+            System.out.println("进入方法userMapper.insertByUserRegister.............");
             if(0==userMapper.insertByUserRegister(user)){
                 //用户插入失败，可能是手机/邮箱已存在
                 System.out.println("用户插入失败，可能是手机/邮箱已存在"+user.toString());
