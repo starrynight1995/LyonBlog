@@ -66,6 +66,7 @@ public class EmailService {
         prop.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         prop.setProperty("mail.smtp.socketFactory.fallback", "false");
         prop.setProperty("mail.smtp.socketFactory.port", ALI_PORT);
+        sender.setJavaMailProperties(prop);
         return sender;
     }
 
