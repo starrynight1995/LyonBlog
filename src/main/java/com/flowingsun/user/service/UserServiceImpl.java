@@ -63,6 +63,7 @@ public class UserServiceImpl implements UserService {
     public String UserRegister(User user,HttpServletRequest request) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String result = "register_fail";
         try{
+            System.out.println("进入方法UserRegister.............");
             String salt = new SecureRandomNumberGenerator().nextBytes().toString();
             String saltPass = user.getUserpass()+user.getTelephone()+salt;
             String md5pass = MD5Utils.encryptPassword(saltPass);
