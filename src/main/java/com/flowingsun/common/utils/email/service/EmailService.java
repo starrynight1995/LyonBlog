@@ -56,7 +56,6 @@ public class EmailService {
      */
     public static void sendHtmlMail(HttpServletRequest request, String toEmail, String userName, Integer randomCode, String userphone) throws MessagingException,UnsupportedEncodingException {
         try{
-            System.out.println("sendHtmlMail开始。。。。。。。。。。。。。。");
             String subject = "Lyon's Blog——注册激活";
             String content = "<html><p>亲爱的：" + userName +
                     ",感谢您注册了Lyon's Blog,"+
@@ -68,17 +67,12 @@ public class EmailService {
             messageHelper.setTo(toEmail);
             messageHelper.setSubject(subject);
             messageHelper.setText(content,true);
-            System.out.println("sendHtmlMail即将发送。。。。。。。。。。。。。。");
             aliMailSender.send(mimeMessage);
-            System.out.println("sendHtmlMail发送完成。。。。。。。。。。。。。。");
         }catch (MessagingException e){
             throw e;
         }catch (UnsupportedEncodingException f){
             throw f;
-        } catch (Exception g){
-            System.out.println("sendHtmlMail异常：.........................\n");
-            g.printStackTrace();
-        }
+        } 
     }
 
     /**
