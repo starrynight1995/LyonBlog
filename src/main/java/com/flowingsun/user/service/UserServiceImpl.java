@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
             String md5pass = MD5Utils.encryptPassword(saltPass);
             user.setUserpass(md5pass);
             user.setSalt(salt);
-            System.out.println("进入方法userMapper.insertByUserRegister.............");
+            System.out.println("准备进入方法userMapper.insertByUserRegister.............");
             if(0==userMapper.insertByUserRegister(user)){
                 //用户插入失败，可能是手机/邮箱已存在
                 System.out.println("用户插入失败，可能是手机/邮箱已存在"+user.toString());
@@ -77,11 +77,13 @@ public class UserServiceImpl implements UserService {
                 return result;
             }
             else{
+                System.out.println("进入方法Random random = new Random(Long.parseLong(user.getTelephone())).............");
                 Random random = new Random(Long.parseLong(user.getTelephone()));
                 Integer randomCode = random.nextInt();
                 //将根据用户注册手机号生成的随机数放入session，然后发送到用户邮箱，等待用户激活。
                 request.getSession().getServletContext().setAttribute(user.getTelephone(),randomCode);
                 try {
+                    System.out.println("进入方法emailService.sendHtmlMail.............");
                     emailService.sendHtmlMail(request,user.getUseremail(),user.getUsername(),randomCode,user.getTelephone());
                     result = "register_succ";
                     System.out.println("用户提交注册信息，激活邮件发送成功"+user.toString());
