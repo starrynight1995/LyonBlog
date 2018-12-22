@@ -58,10 +58,14 @@ public class EmailService {
         sender.setPassword(PASSWORD);
         sender.setDefaultEncoding("Utf-8");
         Properties prop = new Properties();
-        prop.setProperty("mail.smtp.starttls.enable","true");
-        prop.setProperty("mail.smtp.timeout", "25000");
-        prop.setProperty("mail.smtp.auth", "false");
-        sender.setJavaMailProperties(prop);
+        //prop.setProperty("mail.smtp.starttls.enable","true");
+        //prop.setProperty("mail.smtp.timeout", "25000");
+        //prop.setProperty("mail.smtp.auth", "false");
+        //sender.setJavaMailProperties(prop);
+        prop.setProperty("mail.smtp.port", ALI_PORT);
+        prop.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        prop.setProperty("mail.smtp.socketFactory.fallback", "false");
+        prop.setProperty("mail.smtp.socketFactory.port", ALI_PORT);
         return sender;
     }
 
