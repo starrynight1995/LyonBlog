@@ -21,28 +21,8 @@ public class EmailService {
     private static final String USERNAME = "flowingsun007@163.com";
     private static final String PASSWORD = "wy920726zly";
     private static final String EMAILFORM = "flowingsun007@163.com";
-    //private static JavaMailSenderImpl mailSender = createMailSender();
     private static JavaMailSenderImpl aliMailSender = createAliMailSender();
-//    /**
-//     *@Author Lyon[flowingsun007@163.com]
-//     *@Date 18/05/9 18:30
-//     *@Description 发送邮件工具，此处指定的是网易邮件发送服务器
-//     */
-//    private static JavaMailSenderImpl createMailSender() {
-//        JavaMailSenderImpl sender = new JavaMailSenderImpl();
-//        sender.setHost(HOST);
-//        sender.setPort(PORT);
-//        sender.setUsername(USERNAME);
-//        sender.setPassword(PASSWORD);
-//        sender.setDefaultEncoding("Utf-8");
-//        Properties p = new Properties();
-//        //网上找的模板东平西凑，实际上不需要设置这么多属性.....坑爹！
-//        p.setProperty("mail.smtp.starttls.enable","true");
-//        p.setProperty("mail.smtp.timeout", "25000");
-//        p.setProperty("mail.smtp.auth", "false");
-//        sender.setJavaMailProperties(p);
-//        return sender;
-//    }
+
 
     /**
      * @author lyon
@@ -58,10 +38,6 @@ public class EmailService {
         sender.setPassword(PASSWORD);
         sender.setDefaultEncoding("Utf-8");
         Properties prop = new Properties();
-        //prop.setProperty("mail.smtp.starttls.enable","true");
-        //prop.setProperty("mail.smtp.timeout", "25000");
-        //prop.setProperty("mail.smtp.auth", "false");
-        //sender.setJavaMailProperties(prop);
         prop.setProperty("mail.smtp.port",ALI_PORT.toString());
         prop.setProperty("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
         prop.setProperty("mail.smtp.socketFactory.fallback","false");
